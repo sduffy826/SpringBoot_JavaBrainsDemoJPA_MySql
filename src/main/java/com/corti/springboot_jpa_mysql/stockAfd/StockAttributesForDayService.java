@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,8 +63,11 @@ public class StockAttributesForDayService {
     stockAfdRepository.save(stockAfd);
   }
   
-  // Delete record by ticker, date
+  // Delete record by ticker, date, not sure why but this requires transactional annotation... suspect
+  // it's due to the two id's in the call
+  @Transactional
   public void deleteStockAttributesForDay(String tickerSymbol, LocalDate stockDate) {   
+    System.out.println("deleteStockAttributesForDay ticker: " + tickerSymbol + " date: " + stockDate.toString());
     stockAfdRepository.deleteByTickerSymbolAndStockDate(tickerSymbol, stockDate);
   }
   

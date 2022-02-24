@@ -55,6 +55,8 @@ public class StockAttributesForDayController {
   @RequestMapping(method=RequestMethod.DELETE, value="/stocks/{ticker}/{thedate}")  // Delete record by ticker and date
   public void deleteStockAttributesForDay(@PathVariable("ticker") String ticker, @PathVariable("thedate") String isoDate) {  
     LocalDate theDate = LocalDate.parse(isoDate);
+    if (debugIt) System.out.println("theDate is " + theDate.toString());
+    System.out.println("ticker: " + ticker + " theDate: " + theDate.toString());
     stockAttributesForDayService.deleteStockAttributesForDay(ticker, theDate);
   }
   
